@@ -11,7 +11,18 @@
         body {
             font-family: 'Inter', sans-serif;
             overflow-x: hidden; /* Prevents horizontal scrollbar from animations */
+            user-select: none; /* Prevents text selection and typing cursor */
+            cursor: default; /* Sets the default cursor for the whole page */
         }
+        /* Ensure interactive elements are still clearly clickable */
+        a, button, .project-card, .service-card, label {
+            cursor: pointer;
+        }
+        input, textarea {
+            user-select: auto; /* Allow text selection in form fields */
+            cursor: text;
+        }
+
         .hero-section {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x1080/f6b757/ffffff?text=Building+The+Future') no-repeat center center/cover;
         }
@@ -52,6 +63,7 @@
         .fade-in-up { transform: translateY(30px); }
         .fade-in-left { transform: translateX(-40px); }
         .fade-in-right { transform: translateX(40px); }
+        .pop-in { transform: scale(0.95); } /* New pop-up animation state */
 
         /* State when element is visible */
         .is-visible {
@@ -63,15 +75,24 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Header & Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="bg-white shadow-md sticky top-0 z-40">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-[#f6b757]">BCS Builders</a>
+            <a href="#" class="text-2xl font-bold text-[#f6b757]">B<span class="text-[#ff5757]">C</span>S Builders</a>
             <div class="hidden md:flex space-x-8 items-center">
                 <a href="#about" class="text-gray-600 hover:text-[#f6b757] transition">About Us</a>
                 <a href="#projects" class="text-gray-600 hover:text-[#f6b757] transition">Projects</a>
                 <a href="#services" class="text-gray-600 hover:text-[#f6b757] transition">Services</a>
                 <a href="#gallery" class="text-gray-600 hover:text-[#f6b757] transition">Gallery</a>
-                <a href="#contact" class="bg-[#ff5757] text-white px-4 py-2 rounded-md hover:bg-[#ff6f6f] transition cta-button">Contact Us</a>
+                <div class="relative">
+                    <button id="contact-dropdown-button" class="bg-[#ff5757] text-white px-4 py-2 rounded-md hover:bg-[#ff6f6f] transition cta-button flex items-center">
+                        Contact Us <i class="fas fa-caret-down ml-2"></i>
+                    </button>
+                    <div id="contact-dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                        <a href="tel:+919801063161" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><i class="fas fa-phone-alt mr-2 text-[#f6b757]"></i>Call Us</a>
+                        <a href="mailto:bcscelestialbuilders@gmail.com" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><i class="fas fa-envelope mr-2 text-[#f6b757]"></i>Email Us</a>
+                        <a href="https://wa.me/919801063161" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><i class="fab fa-whatsapp mr-2 text-[#f6b757]"></i>WhatsApp Us</a>
+                    </div>
+                </div>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-gray-600">
                 <i class="fas fa-bars text-2xl"></i>
@@ -83,7 +104,9 @@
             <a href="#projects" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Projects</a>
             <a href="#services" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Services</a>
             <a href="#gallery" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Gallery</a>
-            <a href="#contact" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Contact Us</a>
+            <a href="tel:+919801063161" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Call Us</a>
+            <a href="mailto:bcscelestialbuilders@gmail.com" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Email Us</a>
+            <a href="https://wa.me/919801063161" target="_blank" rel="noopener noreferrer" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">WhatsApp Us</a>
         </div>
     </header>
 
@@ -91,9 +114,9 @@
         <!-- Hero Section -->
         <section class="hero-section text-white h-[60vh] md:h-[80vh] flex items-center">
             <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight animate-on-scroll fade-in-up">Building Your Dreams in Ranchi</h1>
-                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto animate-on-scroll fade-in-up" style="transition-delay: 150ms;">BCS Builders: Unwavering commitment to quality, innovation, and customer satisfaction in Morabadi and beyond.</p>
-                <a href="#projects" class="bg-[#ff5757] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#ff6f6f] transition cta-button animate-on-scroll fade-in-up" style="transition-delay: 300ms;">Explore Our Work</a>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight animate-on-scroll pop-in">Building Your Dreams in Ranchi</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto animate-on-scroll pop-in" style="transition-delay: 150ms;">BCS Builders: Unwavering commitment to quality, innovation, and customer satisfaction in Morabadi and beyond.</p>
+                <a href="#projects" class="bg-[#ff5757] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#ff6f6f] transition cta-button animate-on-scroll pop-in" style="transition-delay: 300ms;">Explore Our Work</a>
             </div>
         </section>
 
@@ -105,7 +128,7 @@
                         <img src="https://placehold.co/600x400/fff7ed/f6b757?text=Blueprint+&+Hardhat" alt="BCS Builders Team" class="rounded-lg shadow-xl w-full">
                     </div>
                     <div class="animate-on-scroll fade-in-right">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">About BCS Builders</h2>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">About B<span class="text-[#ff5757]">C</span>S Builders</h2>
                         <p class="text-gray-600 mb-4">
                             Based in the heart of Morabadi, Ranchi, BCS Builders has been a cornerstone of local construction and development for over a decade. We are a team of passionate professionals dedicated to creating spaces that are not just buildings, but homes and thriving business environments.
                         </p>
@@ -135,50 +158,23 @@
         <section id="projects" class="py-20">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 animate-on-scroll fade-in-up">
-                    <h2 class="text-3xl font-bold text-gray-800">Our Landmark Projects</h2>
-                    <p class="text-gray-600 mt-2 max-w-2xl mx-auto">From modern residences to functional commercial spaces, our portfolio showcases our dedication to excellence.</p>
+                    <h2 class="text-3xl font-bold text-gray-800">Our Landmark Project</h2>
+                    <p class="text-gray-600 mt-2 max-w-2xl mx-auto">A showcase of our dedication to excellence in residential construction.</p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex justify-center">
                     <!-- Project Card 1 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group project-card animate-on-scroll fade-in-up">
+                    <div id="project-card-trigger" class="bg-white rounded-lg shadow-lg overflow-hidden group project-card animate-on-scroll fade-in-up md:w-2/3 lg:w-1/2">
                         <div class="relative">
-                            <img src="bcs.jpg" alt="BCS Celestial Garden" class="w-full h-60 object-cover">
+                            <img src="bcs.jpg" alt="Punam Enclave" class="w-full h-72 object-cover">
                             <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 project-overlay flex items-center justify-center">
                                 <p class="text-white text-lg font-semibold">View Details</p>
                             </div>
                         </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">BCS Celestial Garden</h3>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold mb-1">Punam Enclave</h3>
+                            <p class="text-xs text-gray-500 mb-2">(previously named Celestial Castle)</p>
                             <p class="text-gray-600 mb-4">A serene residential complex in Morabadi, offering modern amenities amidst nature.</p>
                             <span class="text-sm font-medium text-green-800 bg-green-100 px-3 py-1 rounded-full">Ongoing</span>
-                        </div>
-                    </div>
-                    <!-- Project Card 2 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group project-card animate-on-scroll fade-in-up" style="transition-delay: 150ms;">
-                         <div class="relative">
-                            <img src="https://placehold.co/600x400/ffedd5/9a3412?text=Site+Under+Construction" alt="Project 2" class="w-full h-60 object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 project-overlay flex items-center justify-center">
-                                <p class="text-white text-lg font-semibold">View Details</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Prime Commercial Tower</h3>
-                            <p class="text-gray-600 mb-4">A state-of-the-art commercial building, currently under construction.</p>
-                            <span class="text-sm font-medium text-green-800 bg-green-100 px-3 py-1 rounded-full">Ongoing</span>
-                        </div>
-                    </div>
-                    <!-- Project Card 3 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group project-card animate-on-scroll fade-in-up" style="transition-delay: 300ms;">
-                         <div class="relative">
-                            <img src="https://placehold.co/600x400/fed7aa/9a3412?text=Sunrise+Apartments" alt="Project 3" class="w-full h-60 object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 project-overlay flex items-center justify-center">
-                                <p class="text-white text-lg font-semibold">View Details</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Sunrise Apartments</h3>
-                            <p class="text-gray-600 mb-4">Luxury apartments offering breathtaking views and premium facilities.</p>
-                            <span class="text-sm font-medium text-orange-800 bg-orange-100 px-3 py-1 rounded-full">Completed</span>
                         </div>
                     </div>
                 </div>
@@ -262,7 +258,7 @@
             <div class="container mx-auto px-6 py-16 text-center text-white">
                 <h2 class="text-3xl font-bold mb-3">Have a project in mind?</h2>
                 <p class="text-red-100 mb-8 max-w-2xl mx-auto">Let's discuss how we can turn your vision into a reality. Get in touch with our team for a free consultation.</p>
-                <a href="#contact" class="bg-white text-[#ff5757] px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition cta-button">Schedule a Consultation</a>
+                <button id="consultation-cta-button" class="bg-white text-[#ff5757] px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition cta-button">Schedule a Consultation</button>
             </div>
         </section>
 
@@ -274,7 +270,7 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- About BCS -->
                 <div class="md:col-span-1">
-                    <h3 class="text-xl font-bold mb-4 text-[#f6b757]">BCS Builders</h3>
+                    <h3 class="text-xl font-bold mb-4 text-[#f6b757]">B<span class="text-[#ff5757]">C</span>S Builders</h3>
                     <p class="text-gray-400">Your trusted partner in construction, committed to building the future of Ranchi. We pride ourselves on integrity, quality, and innovation.</p>
                 </div>
                 <!-- Quick Links -->
@@ -285,7 +281,7 @@
                         <li><a href="#projects" class="text-gray-400 hover:text-white transition">Projects</a></li>
                         <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
                         <li><a href="#gallery" class="text-gray-400 hover:text-white transition">Gallery</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#privacy-policy" id="privacy-policy-link" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <!-- Contact Info -->
@@ -298,17 +294,17 @@
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-phone-alt mr-3 text-[#f6b757]"></i>
-                            <a href="tel:+911234567890" class="hover:text-white transition">+91 98010 63161</a>
+                            <a href="tel:+919801063161" class="hover:text-white transition">+91 98010 63161</a>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-envelope mr-3 text-[#f6b757]"></i>
-                            <a href="mailto:contact@bcsbuilders.in" class="hover:text-white transition">bcscelestialbuilders@gmail.com</a>
+                            <a href="mailto:bcscelestialbuilders@gmail.com" class="hover:text-white transition">bcscelestialbuilders@gmail.com</a>
                         </li>
                     </ul>
                     <div class="mt-6 flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="https://www.facebook.com/share/1C9rnbpdsH/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="https://www.instagram.com/bcsbuildersranchi?igsh=cnJvbzhncjNoZ2Zp" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="https://wa.me/919801063161" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition"><i class="fab fa-whatsapp text-xl"></i></a>
                     </div>
                 </div>
             </div>
@@ -318,7 +314,97 @@
         </div>
     </footer>
 
+    <!-- Consultation Modal -->
+    <section id="consultation-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-lg w-full relative">
+             <button id="close-consultation-modal" class="absolute top-2 right-4 text-gray-500 hover:text-black text-3xl font-bold">&times;</button>
+            <div id="consultation-form-container">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Schedule a Consultation</h2>
+                <form id="consultation-form" class="space-y-4 text-left">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#f6b757] focus:border-[#f6b757] sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Preferred Contact Method</label>
+                        <div class="mt-2 flex justify-around">
+                            <label class="flex items-center">
+                                <input type="radio" name="contact_method" value="whatsapp" class="h-4 w-4 text-[#f6b757] focus:ring-[#ff5757] border-gray-300" checked>
+                                <span class="ml-2 text-gray-700">WhatsApp</span>
+                            </label>
+                             <label class="flex items-center">
+                                <input type="radio" name="contact_method" value="phone" class="h-4 w-4 text-[#f6b757] focus:ring-[#ff5757] border-gray-300">
+                                <span class="ml-2 text-gray-700">Phone</span>
+                            </label>
+                             <label class="flex items-center">
+                                <input type="radio" name="contact_method" value="email" class="h-4 w-4 text-[#f6b757] focus:ring-[#ff5757] border-gray-300">
+                                <span class="ml-2 text-gray-700">Email</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contact_detail" class="block text-sm font-medium text-gray-700">Contact Detail</label>
+                        <input type="tel" id="contact_detail" name="contact_detail" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#f6b757] focus:border-[#f6b757] sm:text-sm" placeholder="Your WhatsApp Number">
+                    </div>
+                    <div class="text-center pt-4">
+                        <button type="submit" class="w-full bg-[#ff5757] text-white px-6 py-3 rounded-md hover:bg-[#ff6f6f] transition cta-button font-semibold">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+            <div id="success-message" class="hidden text-center">
+                <div class="mx-auto w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mb-4">
+                    <i class="fas fa-check text-green-500 text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2 text-gray-800">Thank You!</h2>
+                <p class="text-gray-600">Your consultation request has been received. We will get back to you shortly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Modal -->
+    <section id="privacy-policy-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-3xl w-full relative">
+            <button id="close-privacy-policy" class="absolute top-2 right-4 text-gray-500 hover:text-black text-3xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Privacy Policy</h2>
+            <div class="text-gray-600 space-y-4 max-h-[70vh] overflow-y-auto pr-4 text-left" style="cursor: auto; user-select: text;">
+                <p><strong>Last Updated: July 21, 2025</strong></p>
+                <p>BCS Builders ("us", "we", or "our") operates the website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
+                <h3 class="font-semibold text-lg pt-2">1. Information Collection and Use</h3>
+                <p>We only collect information that you voluntarily provide to us via our consultation form, direct email, or other direct contact from you. This may include your name, phone number, and email address. We will not sell or rent this information to anyone.</p>
+                <h3 class="font-semibold text-lg pt-2">2. Use of Data</h3>
+                <p>Any information you provide to us is used solely to respond to you regarding the reason you contacted us. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request.</p>
+                <h3 class="font-semibold text-lg pt-2">3. Security</h3>
+                <p>The security of your data is important to us, but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect any Personal Information you provide, we cannot guarantee its absolute security.</p>
+                <h3 class="font-semibold text-lg pt-2">4. Changes to This Privacy Policy</h3>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+                <h3 class="font-semibold text-lg pt-2">7. Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:bcscelestialbuilders@gmail.com" class="text-[#f6b757] hover:underline">bcscelestialbuilders@gmail.com</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details Modal -->
+    <section id="project-details-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full relative">
+            <button id="close-project-details-modal" class="absolute top-2 right-4 text-gray-500 hover:text-black text-3xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Punam Enclave Details</h2>
+            <div class="text-gray-600 space-y-4 text-left" style="cursor: auto; user-select: text;">
+                <p>A G+4 strong building in the heart of Morabadi, which is the lungs of Ranchi town. Amidst the lush greenery is this abode you can call your home. 3BHK luxurious flats with -</p>
+                <ul class="list-none space-y-3 pl-2">
+                    <li class="flex items-center"><i class="fas fa-users mr-3 text-[#f6b757]"></i>A Community Space</li>
+                    <li class="flex items-center"><i class="fas fa-video mr-3 text-[#f6b757]"></i>CCTV Surveillance</li>
+                    <li class="flex items-center"><i class="fas fa-gopuram mr-3 text-[#f6b757]"></i>Temple within the premises</li>
+                    <li class="flex items-center"><i class="fas fa-elevator mr-3 text-[#f6b757]"></i>Lift</li>
+                    <li class="flex items-center"><i class="fas fa-tint mr-3 text-[#f6b757]"></i>24x7 Water Supply</li>
+                </ul>
+                <p class="pt-4 font-semibold">All 3BHKs ranging from 1465 to 1510 sqft.</p>
+            </div>
+        </div>
+    </section>
+
+
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -329,43 +415,169 @@
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                
-                if (targetId && targetId.length > 1) {
-                    e.preventDefault();
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+            if (anchor.getAttribute('href') !== '#privacy-policy') {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId.length > 1) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
                     }
-                }
-                
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
         });
+
+        // Modal generic closing function
+        const closeModal = (modal) => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+
+        // Privacy Policy Modal Logic
+        const privacyPolicyLink = document.getElementById('privacy-policy-link');
+        const privacyPolicyModal = document.getElementById('privacy-policy-modal');
+        const closePrivacyPolicyButton = document.getElementById('close-privacy-policy');
+
+        if (privacyPolicyLink) {
+            privacyPolicyLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                privacyPolicyModal.classList.remove('hidden');
+                privacyPolicyModal.classList.add('flex');
+            });
+        }
+        if (closePrivacyPolicyButton) {
+            closePrivacyPolicyButton.addEventListener('click', () => closeModal(privacyPolicyModal));
+        }
+        if (privacyPolicyModal) {
+            privacyPolicyModal.addEventListener('click', (e) => {
+                if (e.target === privacyPolicyModal) closeModal(privacyPolicyModal);
+            });
+        }
+
+        // Consultation Modal Logic
+        const consultationCtaButton = document.getElementById('consultation-cta-button');
+        const consultationModal = document.getElementById('consultation-modal');
+        const closeConsultationModalButton = document.getElementById('close-consultation-modal');
+        const consultationForm = document.getElementById('consultation-form');
+        const consultationFormContainer = document.getElementById('consultation-form-container');
+        const successMessage = document.getElementById('success-message');
+        const contactDetailInput = document.getElementById('contact_detail');
+        const contactMethodRadios = document.querySelectorAll('input[name="contact_method"]');
+
+        if (consultationCtaButton) {
+            consultationCtaButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                consultationModal.classList.remove('hidden');
+                consultationModal.classList.add('flex');
+                // Reset form on open
+                consultationFormContainer.classList.remove('hidden');
+                successMessage.classList.add('hidden');
+                consultationForm.reset();
+                contactDetailInput.type = 'tel';
+                contactDetailInput.placeholder = 'Your WhatsApp Number';
+            });
+        }
+        
+        if(closeConsultationModalButton) {
+            closeConsultationModalButton.addEventListener('click', () => closeModal(consultationModal));
+        }
+        if(consultationModal) {
+            consultationModal.addEventListener('click', (e) => {
+                if (e.target === consultationModal) closeModal(consultationModal);
+            });
+        }
+        
+        if(contactMethodRadios) {
+            contactMethodRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if(e.target.value === 'email') {
+                        contactDetailInput.type = 'email';
+                        contactDetailInput.placeholder = 'Your Email Address';
+                    } else if (e.target.value === 'whatsapp') {
+                        contactDetailInput.type = 'tel';
+                        contactDetailInput.placeholder = 'Your WhatsApp Number';
+                    } else {
+                        contactDetailInput.type = 'tel';
+                        contactDetailInput.placeholder = 'Your Phone Number';
+                    }
+                });
+            });
+        }
+
+        if(consultationForm) {
+            consultationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                consultationFormContainer.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    closeModal(consultationModal);
+                }, 3000); // Hide modal after 3 seconds
+            });
+        }
+        
+        // Contact Dropdown Logic
+        const contactDropdownButton = document.getElementById('contact-dropdown-button');
+        const contactDropdownMenu = document.getElementById('contact-dropdown-menu');
+
+        if(contactDropdownButton) {
+            contactDropdownButton.addEventListener('click', () => {
+                contactDropdownMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e){
+            if (contactDropdownButton && !contactDropdownButton.contains(e.target) && contactDropdownMenu && !contactDropdownMenu.contains(e.target)){
+                contactDropdownMenu.classList.add('hidden');
+            }
+        });
+        
+        // Project Details Modal Logic
+        const projectCardTrigger = document.getElementById('project-card-trigger');
+        const projectDetailsModal = document.getElementById('project-details-modal');
+        const closeProjectDetailsModalButton = document.getElementById('close-project-details-modal');
+
+        if(projectCardTrigger) {
+            projectCardTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                projectDetailsModal.classList.remove('hidden');
+                projectDetailsModal.classList.add('flex');
+            });
+        }
+
+        if(closeProjectDetailsModalButton) {
+            closeProjectDetailsModalButton.addEventListener('click', () => closeModal(projectDetailsModal));
+        }
+        if(projectDetailsModal) {
+            projectDetailsModal.addEventListener('click', (e) => {
+                if (e.target === projectDetailsModal) closeModal(projectDetailsModal);
+            });
+        }
 
         // Scroll Animation Logic
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Animate only once
+                    if (!entry.target.classList.contains('pop-in')) {
+                       observer.unobserve(entry.target);
+                    }
+                } else {
+                     if (entry.target.classList.contains('pop-in')) {
+                        entry.target.classList.remove('is-visible');
+                    }
                 }
             });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
-        });
-
-        animatedElements.forEach(el => {
-            observer.observe(el);
-        });
+        }, { threshold: 0.15 });
+        animatedElements.forEach(el => observer.observe(el));
+    });
     </script>
 
 </body>
